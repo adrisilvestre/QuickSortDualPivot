@@ -1,6 +1,7 @@
 ﻿using System;
 using QuickSortDualPivot.Generator;
 using QuickSortDualPivot.Sorting;
+using QuickSortDualPivot.Utilities;
 
 namespace QuickSortDualPivot
 {
@@ -12,18 +13,23 @@ namespace QuickSortDualPivot
             Console.WriteLine("Ingrese el tamaño del arreglo: ");
             size = Convert.ToInt32(Console.ReadLine());
 
-            /*int[] myArray = new int[size];
-            Random random = new Random();
-            for (var a = 0; a < size - 1; a++)
-            {
-                myArray[a] = random.Next(1, 99);
-            }*/
-            int[] array2 = new int[10] { 10, 5, 7, 4, 15, 96, 33, 50, 11, 8 };
-           
+            //Inicialización del arreglo con valores arbitrarios
+            RandomArrayGenerator randomArr = new RandomArrayGenerator();
+            int[] myArray = randomArr.GenerateRandomArray(size);
 
+            ArrayPrinting printer = new ArrayPrinting();
+            Console.WriteLine("Arreglo inicial: ");
+            printer.PrintIntArray(myArray);
+            Console.WriteLine();
+
+            //Llamada a QuickSort de doble pivote
             SortingArr quickSorting = new SortingArr();
+            quickSorting.DualQuickSort(ref myArray);
 
-            int[] sortedArray = quickSorting.DualQuickSort(array2);
+            //Impresión del arreglo ordenado
+            Console.WriteLine("Arreglo ya ordenado:");
+            printer.PrintIntArray(myArray);
+
 
             Console.ReadKey();
 
