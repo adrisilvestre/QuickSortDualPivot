@@ -47,32 +47,40 @@ namespace QuickSortDualPivot.Sorting
             }
             else if (leftPivot == rightPivot) //si los pivotes son de igual tamaño debe incremetarse el límite inferior
             {
-                while (lowerBound < upperBound && leftPivot == rightPivot )
+                while ( leftPivot == rightPivot )
                 {
+                    if(lowerBound > upperBound)
+                    {
+                        break;
+                    }
+
                     leftPivot = dataToBeSort[lowerBound + 1];
                     lowerBound++;
                 }
             }
 
 
-             int i = lowerBound + 1;
-             leftAux = lowerBound + 1; //variable auxiliar para intercambiar al comparar el primer pivote
+             int refCompare = lowerBound + 1; //variable de referencia para comparar valores.
+             leftAux = lowerBound + 1; //variable auxiliar para intercambiar al comparar el primer pivote.
              rightAux = upperBound - 1; //variable auxiliar para intercambiar al comparar el segundo pivote
 
-            while (i <= rightAux)
+            while (refCompare <= rightAux)
             {
 
-                if (SortingUtilities.More(leftPivot, dataToBeSort[i]))
+                if (SortingUtilities.More(leftPivot, dataToBeSort[refCompare]))
                 {
-                    SortingUtilities.Swap(dataToBeSort, i++, leftAux++);
+                    SortingUtilities.Swap(dataToBeSort, refCompare++, leftAux);
+                    leftAux++;
+                    refCompare++;
                 }
-                else if (SortingUtilities.Less(rightPivot, dataToBeSort[i]))
+                else if (SortingUtilities.Less(rightPivot, dataToBeSort[refCompare]))
                 {
-                    SortingUtilities.Swap(dataToBeSort, i, rightAux--);
+                    SortingUtilities.Swap(dataToBeSort, refCompare, rightAux);
+                    rightAux--;
                 }
                 else
                 {
-                    i++;
+                    refCompare++;
                 }
 
             }
